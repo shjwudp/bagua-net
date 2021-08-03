@@ -93,15 +93,15 @@ pub(crate) unsafe fn from_libc_sockaddr(addr: *const libc::sockaddr) -> Option<S
                 InetAddr::V4(*(addr as *const libc::sockaddr_in)))),
             Some(AddressFamily::Inet6) => Some(SockAddr::Inet(
                 InetAddr::V6(*(addr as *const libc::sockaddr_in6)))),
-            #[cfg(any(target_os = "android", target_os = "linux"))]
-            Some(AddressFamily::Netlink) => Some(SockAddr::Netlink(
-                NetlinkAddr(*(addr as *const libc::sockaddr_nl)))),
+            // #[cfg(any(target_os = "android", target_os = "linux"))]
+            // Some(AddressFamily::Netlink) => Some(SockAddr::Netlink(
+            //     NetlinkAddr(*(addr as *const libc::sockaddr_nl)))),
             // #[cfg(any(target_os = "ios", target_os = "macos"))]
             // Some(AddressFamily::System) => Some(SockAddr::SysControl(
             //     SysControlAddr(*(addr as *const libc::sockaddr_ctl)))),
-            #[cfg(any(target_os = "android", target_os = "linux"))]
-            Some(AddressFamily::Packet) => Some(SockAddr::Link(
-                LinkAddr(*(addr as *const libc::sockaddr_ll)))),
+            // #[cfg(any(target_os = "android", target_os = "linux"))]
+            // Some(AddressFamily::Packet) => Some(SockAddr::Link(
+            //     LinkAddr(*(addr as *const libc::sockaddr_ll)))),
             // #[cfg(any(target_os = "dragonfly",
             //             target_os = "freebsd",
             //             target_os = "ios",
@@ -117,9 +117,9 @@ pub(crate) unsafe fn from_libc_sockaddr(addr: *const libc::sockaddr) -> Option<S
             //         Some(SockAddr::Link(ether_addr))
             //     }
             // },
-            #[cfg(any(target_os = "android", target_os = "linux"))]
-            Some(AddressFamily::Vsock) => Some(SockAddr::Vsock(
-                VsockAddr(*(addr as *const libc::sockaddr_vm)))),
+            // #[cfg(any(target_os = "android", target_os = "linux"))]
+            // Some(AddressFamily::Vsock) => Some(SockAddr::Vsock(
+            //     VsockAddr(*(addr as *const libc::sockaddr_vm)))),
             // Other address families are currently not supported and simply yield a None
             // entry instead of a proper conversion to a `SockAddr`.
             Some(_) | None => None,

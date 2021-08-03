@@ -165,7 +165,7 @@ pub extern "C" fn bagua_net_c_connect(
         let sockaddr = libc::sockaddr {
             sa_family: sockaddr.sa_family,
             sa_data: sockaddr.sa_data,
-            sa_len: 0,
+            // sa_len: 0,
         };
         *socket_listen_comm_id = (*ptr)
             .inner
